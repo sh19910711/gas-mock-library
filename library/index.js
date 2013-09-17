@@ -1,0 +1,1 @@
+(function(){module.exports={SpreadsheetApp:require("./spreadsheet_app")}}).call(this);
