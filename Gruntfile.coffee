@@ -2,35 +2,32 @@ module.exports = (grunt) ->
   _ = require 'underscore'
   init_config = {}
 
+  source_files = [
+    "index",
+    "spreadsheet",
+    "spreadsheet_app",
+    "util",
+  ]
+
+  coffee_source_files_obj = {}
+  _(source_files).each (file)->
+    coffee_source_files_obj["./library/" + file + ".js"] = "./source/" + file + ".coffee"
+
+  uglify_source_files_obj = {}
+  _(source_files).each (file)->
+    uglify_source_files_obj["./library/" + file + ".js"] = "./library/" + file + ".js"
+
   # Coffee Script
   _(init_config).extend
     coffee:
       compile:
-        files:
-          "./library/index.js": [
-            "./source/index.coffee",
-          ]
-          "./library/spreadsheet_app.js": [
-            "./source/spreadsheet_app/*.coffee",
-          ]
-          "./library/spreadsheet.js": [
-            "./source/spreadsheet/*.coffee",
-          ]
+        files: coffee_source_files_obj
 
   # Minify
   _(init_config).extend
     uglify:
       build1:
-        files:
-          "./library/index.js": [
-            "./library/index.js",
-          ]
-          "./library/spreadsheet_app.js": [
-            "./library/spreadsheet_app.js",
-          ]
-          "./library/spreadsheet.js": [
-            "./library/spreadsheet.js",
-          ]
+        files: uglify_source_files_obj
 
   # Mocha
   _(init_config).extend

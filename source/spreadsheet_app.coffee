@@ -1,11 +1,22 @@
-Spreadsheet = require '../spreadsheet'
+_ = require 'underscore'
+Util = require './util'
+Spreadsheet = require './spreadsheet'
 
 class SpreadsheetApp
   constructor: ->
 
-  create: ()->
+  create: (name)->
     if arguments.length == 1
-      return new Spreadsheet
+      loop
+        id = Util.getRandomString(32)
+        break unless _(@spreadsheets).has(id)
+      spreadsheet = new Spreadsheet(id, this)
+      @spreadsheets[id] = spreadsheet
+
+      spreadsheet.rename name
+      new_sheet = spreadsheet.insertSheet()
+
+      return spreadsheet
     else
       throw new Error 'ToImplement'
 
@@ -44,5 +55,7 @@ class SpreadsheetApp
 
   setActiveSpreadsheet: ()->
     throw new Error 'ToImplement'
+
+  spreadsheets: {}
 
 module.exports = SpreadsheetApp

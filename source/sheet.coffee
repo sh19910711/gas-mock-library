@@ -1,19 +1,21 @@
-class Spreadsheet
-  constructor: ()->
+Util = require './util'
+Range = require './range'
+Event = require './event'
 
-  addEditor: ()->
-    throw new Error 'ToImplement'
+class Sheet extends Event
+  constructor: (id)->
+    super()
 
-  addEditors: ()->
-    throw new Error 'ToImplement'
+    @id = id
+    @data = []
 
-  addMenu: ()->
-    throw new Error 'ToImplement'
+    # Init data table
+    for row in [0..2]
+      @data[row] = []
+      for col in [0..2]
+        @data[row][col] = undefined
 
-  addViewer: ()->
-    throw new Error 'ToImplement'
-
-  addViewers: ()->
+  activate: ()->
     throw new Error 'ToImplement'
 
   appendRow: ()->
@@ -22,10 +24,19 @@ class Spreadsheet
   autoResizeColumn: ()->
     throw new Error 'ToImplement'
 
-  copy: ()->
+  clear: ()->
     throw new Error 'ToImplement'
 
-  deleteActiveSheet: ()->
+  clearContents: ()->
+    throw new Error 'ToImplement'
+
+  clearFormats: ()->
+    throw new Error 'ToImplement'
+
+  clearNotes: ()->
+    throw new Error 'ToImplement'
+
+  copyTo: ()->
     throw new Error 'ToImplement'
 
   deleteColumn: ()->
@@ -40,19 +51,13 @@ class Spreadsheet
   deleteRows: ()->
     throw new Error 'ToImplement'
 
-  deleteSheet: ()->
-    throw new Error 'ToImplement'
-
-  duplicateActiveSheet: ()->
-    throw new Error 'ToImplement'
-
   getActiveCell: ()->
     throw new Error 'ToImplement'
 
   getActiveRange: ()->
     throw new Error 'ToImplement'
 
-  getActiveSheet: ()->
+  getCharts: ()->
     throw new Error 'ToImplement'
 
   getColumnWidth: ()->
@@ -61,19 +66,13 @@ class Spreadsheet
   getDataRange: ()->
     throw new Error 'ToImplement'
 
-  getEditors: ()->
-    throw new Error 'ToImplement'
-
-  getFormUrl: ()->
-    throw new Error 'ToImplement'
-
   getFrozenColumns: ()->
     throw new Error 'ToImplement'
 
   getFrozenRows: ()->
     throw new Error 'ToImplement'
 
-  getId: ()->
+  getIndex: ()->
     throw new Error 'ToImplement'
 
   getLastColumn: ()->
@@ -82,25 +81,32 @@ class Spreadsheet
   getLastRow: ()->
     throw new Error 'ToImplement'
 
+  getMaxColumns: ()->
+    throw new Error 'ToImplement'
+
+  getMaxRows: ()->
+    throw new Error 'ToImplement'
+
   getName: ()->
+    Util.log "verbose", "@Sheet#getName: ", @name
+    return @name
+
+  getParent: ()->
     throw new Error 'ToImplement'
 
-  getNumSheets: ()->
-    throw new Error 'ToImplement'
-
-  getOwner: ()->
-    throw new Error 'ToImplement'
-
-  getRange: ()->
-    throw new Error 'ToImplement'
-
-  getRangeByName: ()->
-    throw new Error 'ToImplement'
+  getRange: (row, col)->
+    Util.log '@Sheet#getRange'
+    range = new Range
+    range.data = [
+      {
+        sheet: @
+        row: row
+        col: col
+      }
+    ]
+    return range
 
   getRowHeight: ()->
-    throw new Error 'ToImplement'
-
-  getSheetByName: ()->
     throw new Error 'ToImplement'
 
   getSheetId: ()->
@@ -115,31 +121,40 @@ class Spreadsheet
   getSheetValues: ()->
     throw new Error 'ToImplement'
 
-  getSheets: ()->
-    throw new Error 'ToImplement'
-
-  getSpreadsheetLocale: ()->
-    throw new Error 'ToImplement'
-
-  getSpreadsheetTimeZone: ()->
-    throw new Error 'ToImplement'
-
-  getUrl: ()->
-    throw new Error 'ToImplement'
-
-  getViewers: ()->
-    throw new Error 'ToImplement'
-
   hideColumn: ()->
     throw new Error 'ToImplement'
 
+  hideColumns: ()->
+    throw new Error 'ToImplement'
+
+  hideColumns: ()->
+    throw new Error 'ToImplement'
+
   hideRow: ()->
+    throw new Error 'ToImplement'
+
+  hideRows: ()->
+    throw new Error 'ToImplement'
+
+  hideRows: ()->
+    throw new Error 'ToImplement'
+
+  hideSheet: ()->
+    throw new Error 'ToImplement'
+
+  insertChart: ()->
     throw new Error 'ToImplement'
 
   insertColumnAfter: ()->
     throw new Error 'ToImplement'
 
   insertColumnBefore: ()->
+    throw new Error 'ToImplement'
+
+  insertColumns: ()->
+    throw new Error 'ToImplement'
+
+  insertColumns: ()->
     throw new Error 'ToImplement'
 
   insertColumnsAfter: ()->
@@ -151,10 +166,19 @@ class Spreadsheet
   insertImage: ()->
     throw new Error 'ToImplement'
 
+  insertImage: ()->
+    throw new Error 'ToImplement'
+
   insertRowAfter: ()->
     throw new Error 'ToImplement'
 
   insertRowBefore: ()->
+    throw new Error 'ToImplement'
+
+  insertRows: ()->
+    throw new Error 'ToImplement'
+
+  insertRows: ()->
     throw new Error 'ToImplement'
 
   insertRowsAfter: ()->
@@ -163,40 +187,13 @@ class Spreadsheet
   insertRowsBefore: ()->
     throw new Error 'ToImplement'
 
-  insertSheet: ()->
+  isSheetHidden: ()->
     throw new Error 'ToImplement'
 
-  isAnonymousView: ()->
+  newChart: ()->
     throw new Error 'ToImplement'
 
-  isAnonymousWrite: ()->
-    throw new Error 'ToImplement'
-
-  isReadable: ()->
-    throw new Error 'ToImplement'
-
-  isWritable: ()->
-    throw new Error 'ToImplement'
-
-  moveActiveSheet: ()->
-    throw new Error 'ToImplement'
-
-  removeEditor: ()->
-    throw new Error 'ToImplement'
-
-  removeMenu: ()->
-    throw new Error 'ToImplement'
-
-  removeNamedRange: ()->
-    throw new Error 'ToImplement'
-
-  removeViewer: ()->
-    throw new Error 'ToImplement'
-
-  rename: ()->
-    throw new Error 'ToImplement'
-
-  renameActiveSheet: ()->
+  removeChart: ()->
     throw new Error 'ToImplement'
 
   setActiveRange: ()->
@@ -205,10 +202,7 @@ class Spreadsheet
   setActiveSelection: ()->
     throw new Error 'ToImplement'
 
-  setActiveSheet: ()->
-    throw new Error 'ToImplement'
-
-  setAnonymousAccess: ()->
+  setActiveSelection: ()->
     throw new Error 'ToImplement'
 
   setColumnWidth: ()->
@@ -220,8 +214,12 @@ class Spreadsheet
   setFrozenRows: ()->
     throw new Error 'ToImplement'
 
-  setNamedRange: ()->
-    throw new Error 'ToImplement'
+  setName: (name)->
+    Util.log '@Sheet#setname: name = ', name
+    src = @name
+    dest = name
+    @name = name
+    @fire('change_name', src, dest)
 
   setRowHeight: ()->
     throw new Error 'ToImplement'
@@ -229,19 +227,25 @@ class Spreadsheet
   setSheetProtection: ()->
     throw new Error 'ToImplement'
 
-  setSpreadsheetLocale: ()->
+  showColumns: ()->
     throw new Error 'ToImplement'
 
-  setSpreadsheetTimeZone: ()->
+  showColumns: ()->
     throw new Error 'ToImplement'
 
-  show: ()->
+  showRows: ()->
+    throw new Error 'ToImplement'
+
+  showRows: ()->
+    throw new Error 'ToImplement'
+
+  showSheet: ()->
     throw new Error 'ToImplement'
 
   sort: ()->
     throw new Error 'ToImplement'
 
-  toast: ()->
+  sort: ()->
     throw new Error 'ToImplement'
 
   unhideColumn: ()->
@@ -250,7 +254,9 @@ class Spreadsheet
   unhideRow: ()->
     throw new Error 'ToImplement'
 
-  updateMenu: ()->
+  updateChart: ()->
     throw new Error 'ToImplement'
 
-module.exports = Spreadsheet
+  data: []
+
+module.exports = Sheet
