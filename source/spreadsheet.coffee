@@ -27,7 +27,8 @@ class Spreadsheet
     throw new Error 'ToImplement'
 
   appendRow: ()->
-    throw new Error 'ToImplement'
+    Util.log "verbose", "Spreadsheet#appendRow"
+    return @activeSheet.appendRow.apply @activeSheet, arguments
 
   autoResizeColumn: ()->
     throw new Error 'ToImplement'
@@ -45,7 +46,8 @@ class Spreadsheet
     throw new Error 'ToImplement'
 
   deleteRow: ()->
-    throw new Error 'ToImplement'
+    Util.log "verbose", "Spreadsheet#deleteRow"
+    return @activeSheet.deleteRow.apply @activeSheet, arguments
 
   deleteRows: ()->
     throw new Error 'ToImplement'
@@ -129,7 +131,12 @@ class Spreadsheet
     throw new Error 'ToImplement'
 
   getSheets: ()->
-    throw new Error 'ToImplement'
+    Util.log "verbose", "@Spreadsheet#getSheets"
+    return _(@sheets).keys().map(
+      (key)->
+        return @sheets[key].sheet
+      @
+    )
 
   getSpreadsheetLocale: ()->
     throw new Error 'ToImplement'
@@ -180,6 +187,10 @@ class Spreadsheet
     Util.log 'verbose', '@Spreadsheet#insertSheet'
     id = Util.getRandomString(32)
     sheet = new Sheet(id)
+    @sheets[id] = {
+      sheet: sheet
+      id: id
+    }
 
     # シートの名前
     loop
@@ -290,6 +301,7 @@ class Spreadsheet
   updateMenu: ()->
     throw new Error 'ToImplement'
 
+  @sheets: {}
   @activeSheet: null
 
 module.exports = Spreadsheet

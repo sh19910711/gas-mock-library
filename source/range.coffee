@@ -170,7 +170,9 @@ class Range
     throw new Error 'ToImplement'
 
   getValue: ()->
+    Util.log 'verbose', '@Range#getValue', @data, @data[0].row, @data[0].col
     obj = @data[0]
+    obj.sheet.resize obj.col, obj.row if obj.row >= obj.sheet.width || obj.col >= obj.sheet.col
     Util.log 'verbose', '@Range#getValue', obj.sheet.data[obj.row][obj.col]
     return obj.sheet.data[obj.row][obj.col]
 
@@ -303,7 +305,10 @@ class Range
   setValue: (new_value)->
     Util.log 'verbose', '@Range#setValue', new_value
     obj = @data[0]
+    Util.log 'verbose', '@Range#setValue', obj.row, obj.col
+    obj.sheet.resize obj.col, obj.row if obj.row >= obj.sheet.width || obj.col >= obj.sheet.col
     obj.sheet.data[obj.row][obj.col] = new_value
+    Util.log 'verbose', '@Range#setValue: finish'
 
   setValues: ()->
     throw new Error 'ToImplement'

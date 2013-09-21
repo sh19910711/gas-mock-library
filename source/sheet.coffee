@@ -9,17 +9,25 @@ class Sheet extends Event
     @id = id
     @data = []
 
+    @width = 1
+    @height = 1
+
     # Init data table
-    for row in [0..2]
+    for row in [0..@height]
       @data[row] = []
-      for col in [0..2]
+      for col in [0..@width]
         @data[row][col] = undefined
 
   activate: ()->
     throw new Error 'ToImplement'
 
-  appendRow: ()->
-    throw new Error 'ToImplement'
+  appendRow: (row)->
+    Util.log "verbose", "Sheet#appendRow"
+    row.unshift undefined
+    Util.log "verbose", "Sheet#appendRow, row = ", row
+    @height += 1
+    @data[@height - 1] = row
+    return @
 
   autoResizeColumn: ()->
     throw new Error 'ToImplement'
@@ -45,8 +53,11 @@ class Sheet extends Event
   deleteColumns: ()->
     throw new Error 'ToImplement'
 
-  deleteRow: ()->
-    throw new Error 'ToImplement'
+  deleteRow: (row_id)->
+    Util.log "verbose", "Sheet#deleteRow"
+    @data.splice row_id, 1
+    @height -= 1
+    return @
 
   deleteRows: ()->
     throw new Error 'ToImplement'
@@ -99,9 +110,9 @@ class Sheet extends Event
   getRange: (params...)->
     if params.length == 1
       str = params[0]
-      row_str = (str.match /^[A-Z]+/)[0]
-      col_str = str.substr(row_str.length)
-      row_str = Util.getAlphabetNumber row_str
+      col_str = (str.match /^[A-Z]+/)[0]
+      row_str = str.substr(col_str.length)
+      col_str = Util.getAlphabetNumber col_str
       row = parseInt(row_str, 10)
       col = parseInt(col_str, 10)
     else if params.length == 2
@@ -109,7 +120,8 @@ class Sheet extends Event
       col = params[1]
     else
       throw new Error 'ToImplement'
-    Util.log 'verbose', '@Sheet#getRange', @, row, col
+
+    Util.log 'verbose', '@Sheet#getRange', row, col
     range = new Range
     range.data = [
       {
@@ -271,6 +283,19 @@ class Sheet extends Event
   updateChart: ()->
     throw new Error 'ToImplement'
 
+  resize: (width, height) ->
+    Util.log 'verbose', '@Sheet#resize', width, height
+    @width = width + 1
+    @height = height + 1
+    # Init data table
+    for row in [0..@height]
+      unless @data[row] instanceof Array
+        @data[row] = []
+        for col in [0..@width]
+          @data[row][col] = undefined
+
+  width: 0
+  height: 0
   data: []
   activeRange: null
 
