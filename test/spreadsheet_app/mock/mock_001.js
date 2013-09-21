@@ -25,5 +25,17 @@ module.exports = {
     var value = new_sheet.getRange(2, 2).getValue();
     Logger.log(value);
     return value;
+  },
+  // Active系
+  test_004: function test_004() {
+    var sp_new = SpreadsheetApp.create("テスト");
+    SpreadsheetApp.setActiveSpreadsheet(sp_new);
+    var new_sheet = sp_new.insertSheet();
+    new_sheet.setName("test_sheet");
+    var sheet = sp_new.getSheetByName("test_sheet");
+    sheet.getRange("B2").setValue("てすと");
+    sheet.setActiveRange(sheet.getRange("B2"));
+    var value = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getActiveCell().getValue();
+    return value;
   }
 };
