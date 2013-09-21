@@ -20,7 +20,12 @@ describe('T001: SpreadsheetApp', function() {
   });
   it('T001_006: #create', function t_001_006() {
     var ret = mock.test_006();
-    ret.width.should.be.equal(20);
-    ret.height.should.be.equal(10);
+    ret.width.should.be.equal(10);
+    ret.height.should.be.equal(20);
+  });
+  it('T001_007: #create', function t_001_007() {
+    var ret = mock.test_007();
+    ret.width.should.be.equal(5);
+    ret.height.should.be.equal(17);
   });
 });
