@@ -28,4 +28,7 @@ describe('T001: SpreadsheetApp', function() {
     ret.width.should.be.equal(5);
     ret.height.should.be.equal(17);
   });
+  it('T001_008: #create', function t_001_008() {
+    mock.test_008().should.be.equal(null);
+  });
 });

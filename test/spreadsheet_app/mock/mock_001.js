@@ -70,5 +70,13 @@ module.exports = {
     var h = sp.getDataRange().getHeight();
     var value = {width: w, height: h};
     return value;
+  },
+  // delete sheet
+  test_008: function test_008() {
+    var sp = SpreadsheetApp.create("test");
+    var sheet = sp.insertSheet("test-sheet");
+    sp.deleteSheet(sheet);
+    var sheet2 = sp.getSheetByName("test-sheet");
+    return sheet2;
   }
 };
