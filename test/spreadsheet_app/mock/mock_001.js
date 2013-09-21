@@ -47,5 +47,16 @@ module.exports = {
     sp.deleteRow(2);
     var value = sp.getSheets()[0].getRange(2, 1).getValue();
     return value;
+  },
+  // sheet size
+  test_006: function test_006() {
+    var sp = SpreadsheetApp.create("test");
+    sp.insertSheet("test");
+    var sheet = sp.getSheetByName("test");
+    sheet.getRange(20, 10).setValue("hello");
+    var w = sp.getDataRange().getWidth();
+    var h = sp.getDataRange().getHeight();
+    var value = { width: w, height: h };
+    return value;
   }
 };
