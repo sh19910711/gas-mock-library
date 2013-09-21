@@ -52,10 +52,12 @@ class Sheet extends Event
     throw new Error 'ToImplement'
 
   getActiveCell: ()->
-    throw new Error 'ToImplement'
+    Util.log "verbose", "@Sheet#getActiveCell", @activeRange
+    return @activeRange
 
   getActiveRange: ()->
-    throw new Error 'ToImplement'
+    Util.log "verbose", "@Sheet#getActiveRange", @activeRange
+    return @activeRange
 
   getCharts: ()->
     throw new Error 'ToImplement'
@@ -208,8 +210,8 @@ class Sheet extends Event
   removeChart: ()->
     throw new Error 'ToImplement'
 
-  setActiveRange: ()->
-    throw new Error 'ToImplement'
+  setActiveRange: (range)->
+    @activeRange = range
 
   setActiveSelection: ()->
     throw new Error 'ToImplement'
@@ -270,5 +272,6 @@ class Sheet extends Event
     throw new Error 'ToImplement'
 
   data: []
+  activeRange: null
 
 module.exports = Sheet

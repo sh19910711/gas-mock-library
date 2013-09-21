@@ -12,6 +12,7 @@ class SpreadsheetApp
         break unless _(@spreadsheets).has(id)
       spreadsheet = new Spreadsheet(id, this)
       @spreadsheets[id] = spreadsheet
+      @activeSpreadsheet = null
 
       spreadsheet.rename name
       new_sheet = spreadsheet.insertSheet()
@@ -33,7 +34,7 @@ class SpreadsheetApp
     throw new Error 'ToImplement'
 
   getActiveSpreadsheet: ()->
-    throw new Error 'ToImplement'
+    return @activeSpreadsheet
 
   newDataValidation: ()->
     throw new Error 'ToImplement'
@@ -53,9 +54,10 @@ class SpreadsheetApp
   setActiveSheet: ()->
     throw new Error 'ToImplement'
 
-  setActiveSpreadsheet: ()->
-    throw new Error 'ToImplement'
+  setActiveSpreadsheet: (spreadsheet)->
+    @activeSpreadsheet = spreadsheet
 
   spreadsheets: {}
+  activeSpreadsheet: null
 
 module.exports = SpreadsheetApp

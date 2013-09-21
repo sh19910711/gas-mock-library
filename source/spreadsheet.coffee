@@ -63,7 +63,8 @@ class Spreadsheet
     throw new Error 'ToImplement'
 
   getActiveSheet: ()->
-    throw new Error 'ToImplement'
+    Util.log "verbose", "@Spreadsheet#getActiveSheet", @activeSheet
+    return @activeSheet
 
   getColumnWidth: ()->
     throw new Error 'ToImplement'
@@ -180,13 +181,13 @@ class Spreadsheet
     id = Util.getRandomString(32)
     sheet = new Sheet(id)
 
-    # $BL>A0$r7h$a$k(B Sheet #{number}
+    # シートの名前
     loop
       @sheetCount += 1
       name = "Sheet " + @sheetCount
       break unless _(@sheetNames).has(name)
 
-    # $B%7!<%H$NL>A0$NJQ99$r8!CN$9$k(B
+    # 名前の登録
     Util.log 'verbose', "before setname", sheet, name
     spreadsheet = @
     sheet.setName name
@@ -195,6 +196,10 @@ class Spreadsheet
       Util.log 'verbose', 'detect change name: ', src, dst
       spreadsheet.sheetNames = _(spreadsheet.sheetNames).omit(src)
       spreadsheet.sheetNames[dst] = sheet
+
+    # Active sheetに設定
+    @activeSheet = sheet
+
     return sheet
 
   isAnonymousView: ()->
@@ -237,8 +242,8 @@ class Spreadsheet
   setActiveSelection: ()->
     throw new Error 'ToImplement'
 
-  setActiveSheet: ()->
-    throw new Error 'ToImplement'
+  setActiveSheet: (sheet)->
+    @activeSheet = sheet
 
   setAnonymousAccess: ()->
     throw new Error 'ToImplement'
@@ -284,5 +289,7 @@ class Spreadsheet
 
   updateMenu: ()->
     throw new Error 'ToImplement'
+
+  @activeSheet: null
 
 module.exports = Spreadsheet
