@@ -1,6 +1,7 @@
 _     = require 'underscore'
 Util  = require './util'
 Sheet = require './sheet'
+Range = require './range'
 
 class Spreadsheet
   constructor: (id)->
@@ -72,7 +73,8 @@ class Spreadsheet
     throw new Error 'ToImplement'
 
   getDataRange: ()->
-    throw new Error 'ToImplement'
+    Util.log 'verbose', '@Spreadsheet#getDataRange'
+    return @activeSheet.getDataRange.apply @activeSheet, arguments
 
   getEditors: ()->
     throw new Error 'ToImplement'
@@ -115,7 +117,7 @@ class Spreadsheet
     throw new Error 'ToImplement'
 
   getSheetByName: (name)->
-    Util.log 'verbose', '@Spreadsheet#getSheetByName'
+    Util.log 'verbose', '@Spreadsheet#getSheetByName', @sheetNames
     return @sheetNames[name]
 
   getSheetId: ()->
@@ -183,7 +185,7 @@ class Spreadsheet
   insertRowsBefore: ()->
     throw new Error 'ToImplement'
 
-  insertSheet: ()->
+  insertSheet: (params...)->
     Util.log 'verbose', '@Spreadsheet#insertSheet'
     id = Util.getRandomString(32)
     sheet = new Sheet(id)
@@ -192,14 +194,17 @@ class Spreadsheet
       id: id
     }
 
-    # シートの名前
-    loop
-      @sheetCount += 1
-      name = "Sheet " + @sheetCount
-      break unless _(@sheetNames).has(name)
+    if params.length == 0
+      # シートの名前
+      loop
+        @sheetCount += 1
+        name = "Sheet " + @sheetCount
+        break unless _(@sheetNames).has(name)
+    else if params.length == 1
+      name = params[0]
 
     # 名前の登録
-    Util.log 'verbose', "before setname", sheet, name
+    Util.log 'verbose', "before setname", name
     spreadsheet = @
     sheet.setName name
     @sheetNames[name] = sheet

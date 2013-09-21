@@ -2,6 +2,8 @@ Util = require './util'
 Range = require './range'
 Event = require './event'
 
+SHEET_MARGIN = 10
+
 class Sheet extends Event
   constructor: (id)->
     super()
@@ -9,8 +11,8 @@ class Sheet extends Event
     @id = id
     @data = []
 
-    @width = 1
-    @height = 1
+    @width = 0 + SHEET_MARGIN
+    @height = 0 + SHEET_MARGIN
 
     # Init data table
     for row in [0..@height]
@@ -26,7 +28,8 @@ class Sheet extends Event
     row.unshift undefined
     Util.log "verbose", "Sheet#appendRow, row = ", row
     @height += 1
-    @data[@height - 1] = row
+    @data[@height - SHEET_MARGIN] = row
+    Util.log "verbose", "Sheet#appendRow, row_id = ", (@height - SHEET_MARGIN - 1)
     return @
 
   autoResizeColumn: ()->
@@ -55,6 +58,7 @@ class Sheet extends Event
 
   deleteRow: (row_id)->
     Util.log "verbose", "Sheet#deleteRow"
+    Util.log 'verbose', 'Sheet#deleteRow', @data[row_id], @data[row_id + 1]
     @data.splice row_id, 1
     @height -= 1
     return @
@@ -77,7 +81,18 @@ class Sheet extends Event
     throw new Error 'ToImplement'
 
   getDataRange: ()->
-    throw new Error 'ToImplement'
+    Util.log 'verbose', '@Spreadsheet#getDataRange'
+    range = new Range
+    range.data = [
+      {
+        sheet: @
+        row: 1
+        col: 1
+        width: @width - SHEET_MARGIN
+        height: @height - SHEET_MARGIN
+      }
+    ]
+    return range
 
   getFrozenColumns: ()->
     throw new Error 'ToImplement'
@@ -285,14 +300,21 @@ class Sheet extends Event
 
   resize: (width, height) ->
     Util.log 'verbose', '@Sheet#resize', width, height
-    @width = width + 1
-    @height = height + 1
+    @width = width + SHEET_MARGIN
+    @height = height + SHEET_MARGIN
     # Init data table
     for row in [0..@height]
       unless @data[row] instanceof Array
         @data[row] = []
         for col in [0..@width]
           @data[row][col] = undefined
+
+  get_data: (row, col) ->
+    return @data[row][col]
+
+  set_data: (row, col, value) ->
+    Util.log 'verbose', '@set_data', row, col, value
+    @data[row][col] = value
 
   width: 0
   height: 0
