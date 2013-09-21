@@ -4,6 +4,6 @@ module.exports = {
     global.SpreadsheetApp = new SpreadsheetApp;
 
     var Util = require('../../source').Util;
-    // Util.log_visible["verbose"] = true;
+    Util.log_visible["verbose"] = true;
   }
 };

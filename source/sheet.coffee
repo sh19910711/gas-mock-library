@@ -94,8 +94,20 @@ class Sheet extends Event
   getParent: ()->
     throw new Error 'ToImplement'
 
-  getRange: (row, col)->
-    Util.log '@Sheet#getRange'
+  getRange: (params...)->
+    if params.length == 1
+      str = params[0]
+      row_str = (str.match /^[A-Z]+/)[0]
+      col_str = str.substr(row_str.length)
+      row_str = Util.getAlphabetNumber row_str
+      row = parseInt(row_str, 10)
+      col = parseInt(col_str, 10)
+    else if params.length == 2
+      row = params[0]
+      col = params[1]
+    else
+      throw new Error 'ToImplement'
+    Util.log 'verbose', '@Sheet#getRange', @, row, col
     range = new Range
     range.data = [
       {

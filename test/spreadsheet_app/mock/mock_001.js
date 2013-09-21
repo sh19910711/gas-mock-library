@@ -23,7 +23,6 @@ module.exports = {
     var new_sheet = spreadsheet.insertSheet();
     new_sheet.getRange("B2").setValue("test");
     var value = new_sheet.getRange(2, 2).getValue();
-    Logger.log(value);
     return value;
   },
   // Active系
