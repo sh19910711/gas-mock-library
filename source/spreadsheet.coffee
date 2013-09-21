@@ -84,7 +84,7 @@ class Spreadsheet
     throw new Error 'ToImplement'
 
   getId: ()->
-    throw new Error 'ToImplement'
+    return @id
 
   getLastColumn: ()->
     throw new Error 'ToImplement'

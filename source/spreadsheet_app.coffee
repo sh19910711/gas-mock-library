@@ -41,8 +41,8 @@ class SpreadsheetApp
   open: ()->
     throw new Error 'ToImplement'
 
-  openById: ()->
-    throw new Error 'ToImplement'
+  openById: (id)->
+    return @spreadsheets[id]
 
   openByUrl: ()->
     throw new Error 'ToImplement'
