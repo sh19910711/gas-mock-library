@@ -15,8 +15,15 @@ describe('T001: SpreadsheetApp', function() {
   it('T001_004: #create', function t_001_004() {
     mock.test_004().should.be.equal("てすと");
   });
-  it('T001_005: #create', function t_001_005() {
-    mock.test_005().should.be.equal("test3");
+  describe('T001_005: rows', function() {
+    it('T001_005_001: #create', function t_001_005_001() {
+      mock.test_005_001().should.be.equal("test3");
+    });
+    it('T001_005_002: #create', function t_001_005_001() {
+      var ret = mock.test_005_002();
+      ret[0].should.be.equal("test-1");
+      ret[1].should.be.equal("test-2");
+    });
   });
   it('T001_006: #create', function t_001_006() {
     var ret = mock.test_006();

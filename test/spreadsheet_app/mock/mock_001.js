@@ -37,8 +37,8 @@ module.exports = {
     var value = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getActiveCell().getValue();
     return value;
   },
-  // row
-  test_005: function test_005() {
+  // row.1
+  test_005_001: function() {
     var sp = SpreadsheetApp.create("test");
     sp.appendRow(["test1"]);
     sp.appendRow(["test2"]);
@@ -46,6 +46,18 @@ module.exports = {
     sp.deleteRow(2);
     var value = sp.getSheets()[0].getRange(2, 1).getValue();
     return value;
+  },
+  // row.2
+  test_005_002: function test_005_002() {
+    var sp = SpreadsheetApp.create("test");
+    var s = sp.getSheets()[0];
+    s.getRange("A150").setValue("test-1");
+    s.appendRow(["test-2"]);
+    var v = {
+      0: s.getRange(150, 1).getValue(),
+      1: s.getRange(151, 1).getValue()
+    };
+    return v;
   },
   // sheet size
   test_006: function test_006() {
