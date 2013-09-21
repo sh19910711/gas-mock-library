@@ -83,11 +83,19 @@ module.exports = {
     return value;
   },
   // delete sheet
-  test_008: function test_008() {
+  test_008_001: function() {
     var sp = SpreadsheetApp.create("test");
     var sheet = sp.insertSheet("test-sheet");
     sp.deleteSheet(sheet);
     var sheet2 = sp.getSheetByName("test-sheet");
     return sheet2;
+  },
+  // delete sheet.2
+  test_008_002: function() {
+    var sp = SpreadsheetApp.create("test");
+    var sheet = sp.insertSheet("test-sheet");
+    sp.deleteSheet(sheet);
+    var v = sp.getSheets().length;
+    return v;
   }
 };

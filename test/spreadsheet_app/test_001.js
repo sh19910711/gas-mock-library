@@ -35,7 +35,12 @@ describe('T001: SpreadsheetApp', function() {
     ret.width.should.be.equal(5);
     ret.height.should.be.equal(17);
   });
-  it('T001_008: #create', function t_001_008() {
-    (mock.test_008() === null).should.be.equal(true);
+  describe('T001_008: delete sheet', function t_001_008() {
+    it('T001_008_001: #create', function t_001_008_001() {
+      (mock.test_008_001() === null).should.be.equal(true);
+    });
+    it('T001_008_002: #create', function t_001_008_002() {
+      mock.test_008_002().should.be.equal(1);
+    });
   });
 });
