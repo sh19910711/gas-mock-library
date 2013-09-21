@@ -16,5 +16,14 @@ module.exports = {
     var id = spreadsheet.getId();
     var sp = SpreadsheetApp.openById(id);
     return sp.getName();
+  },
+  // A1表記
+  test_003: function() {
+    var spreadsheet = SpreadsheetApp.create("test");
+    var new_sheet = spreadsheet.insertSheet();
+    new_sheet.getRange("B2").setValue("test");
+    var value = new_sheet.getRange(2, 2).getValue();
+    Logger.log(value);
+    return value;
   }
 };

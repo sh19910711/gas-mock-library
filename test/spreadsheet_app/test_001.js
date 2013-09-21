@@ -9,4 +9,7 @@ describe('T001: SpreadsheetApp', function() {
   it('T001_002: #create', function t_001_002() {
     mock.test_002().should.be.equal("test");
   });
+  it('T001_003: #create', function t_001_003() {
+    mock.test_003().should.be.equal("test");
+  });
 });
