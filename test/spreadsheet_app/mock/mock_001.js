@@ -37,5 +37,15 @@ module.exports = {
     sheet.setActiveRange(sheet.getRange("B2"));
     var value = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getActiveCell().getValue();
     return value;
+  },
+  // row
+  test_005: function test_005() {
+    var sp = SpreadsheetApp.create("test");
+    sp.appendRow(["test1"]);
+    sp.appendRow(["test2"]);
+    sp.appendRow(["test3"]);
+    sp.deleteRow(2);
+    var value = sp.getSheets()[0].getRange(2, 1).getValue();
+    return value;
   }
 };
