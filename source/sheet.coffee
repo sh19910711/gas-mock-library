@@ -53,8 +53,11 @@ class Sheet extends Event
   deleteColumn: ()->
     throw new Error 'ToImplement'
 
-  deleteColumns: ()->
-    throw new Error 'ToImplement'
+  deleteColumns: (start, columns)->
+    Util.log 'verbose', 'Sheet#deleteColumns'
+    for row in [0..@height]
+      @data[row].splice(start, columns)
+    @width -= columns
 
   deleteRow: (row_id)->
     Util.log "verbose", "Sheet#deleteRow"
@@ -63,8 +66,10 @@ class Sheet extends Event
     @height -= 1
     return @
 
-  deleteRows: ()->
-    throw new Error 'ToImplement'
+  deleteRows: (start, rows)->
+    Util.log "verbose", "Sheet#deleteRows"
+    @data.splice start, rows
+    @height -= rows
 
   getActiveCell: ()->
     Util.log "verbose", "@Sheet#getActiveCell", @activeRange

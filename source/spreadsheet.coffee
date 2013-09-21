@@ -53,8 +53,8 @@ class Spreadsheet
   deleteRows: ()->
     throw new Error 'ToImplement'
 
-  deleteSheet: ()->
-    throw new Error 'ToImplement'
+  deleteSheet: (sheet)->
+    @sheetNames[sheet.name] = null
 
   duplicateActiveSheet: ()->
     throw new Error 'ToImplement'
